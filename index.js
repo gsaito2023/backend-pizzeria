@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const app = express()
 const allRouter=require('./routes/allRoutes')
-
+//comment
 const corspolicy = {
     origin:'http://localhost:3000'
 }
