@@ -3,7 +3,7 @@ const allRouter = express.Router()
 const multer = require('multer')
 const getFields = multer()
 
-const {Food,Users} = require('../models/allSchemas')
+const {Food,Users,Items} = require('../models/allSchemas')
 
 allRouter.get('/menu',async(req,res)=>{
     const foodData = await Food.find({})
@@ -33,6 +33,15 @@ allRouter.post('/login',getFields.none(), async (req,res)=>{
     }
     catch(error){
         res.status(500).send(error)
+    }
+})
+
+allRouter.get('/', async(req, res) => {
+    const itemData = await Items.find({});
+    try{
+        res.send(itemData);
+    }catch(error){
+        res.status(500).send(error);
     }
 })
 
