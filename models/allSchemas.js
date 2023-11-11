@@ -36,7 +36,15 @@ const UserSchema = mongoose.Schema({
     }
 })
 
+const ItemSchema = mongoose.Schema({
+    id: Number,
+    name: String,
+    image: String,
+    tag: String
+})
+
 const Food = mongoose.model('Food',FoodSchema)
 const Users = mongoose.model('User',UserSchema)
+const Items = mongoose.model('Item', ItemSchema);
 
-module.exports = {Food,Users}
+module.exports = {Food,Users,Items}
