@@ -16,9 +16,9 @@ allRouter.get('/menu',async(req,res)=>{
 })
 
 allRouter.post('/signup',getFields.none(),async (req,res)=>{
+    try{
     const newuser = new Users(req.body)
     const userData = await newuser.save()
-    try{
         res.send(userData)
     }
     catch(error){
@@ -35,5 +35,29 @@ allRouter.post('/login',getFields.none(), async (req,res)=>{
         res.status(500).send(error)
     }
 })
-
+allRouter.put('/updateProfile',getFields.none(),async(req,res)=>{
+    try{
+    const user = await Users.updateOne({email:req.body.email},{
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        phoneNumber:req.body.phoneNumber
+    })
+   
+        res.send(user)
+    }
+    catch{
+        res.status(500).send(error)
+    }
+})
+allRouter.put('/changePassword',getFields.none(),async(req,res)=>{
+    try{
+        const user = await Users.updateOne({email:req.body.email},{
+            password:req.body.newPassword
+        })
+        res.send(user)
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+})
 module.exports = allRouter
