@@ -69,5 +69,28 @@ allRouter.get('/', async(req, res) => {
         res.status(500).send(error);
     }
 })
+allRouter.get('/menu/:searchTerm',async(req,res)=>{
+    const searchTerm  = req.params.searchTerm
+    const searchTermRegex = new RegExp(searchTerm,'i')
+    console.log(searchTerm)
+    const foodData = await Food.find({name:{$regex:searchTermRegex}})
+    try{
+        res.send(foodData)
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+})
+allRouter.get('/menu/item/:id',async(req,res)=>{
+    const id  = req.params.id
+
+    const foodData = await Food.find({id:id})
+    try{
+        res.send(foodData)
+    }
+    catch(error){
+        res.status(500).send(error)
+    }
+})
 
 module.exports = allRouter
